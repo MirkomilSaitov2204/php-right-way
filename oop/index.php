@@ -38,6 +38,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 session_start();
 
 define('STORAGE_PATH', __DIR__ . './storage');
+define('VIEW_PATH', __DIR__ . './views');
 
 //
 //$transaction = new Transaction();
@@ -181,17 +182,24 @@ define('STORAGE_PATH', __DIR__ . './storage');
 //echo "<pre>";
 //print_r($_SERVER);
 //echo "<pre>";
+try {
 
-$router = new App\Router();
+    $router = new App\Router();
 
-$router
-    ->get('/', [App\Classes\Home::class, 'index'])
-    ->post('/upload', [App\Classes\Home::class, 'upload'])
-    ->get('/invoice', [App\Classes\Invoice::class, 'index'])
-    ->get('/invoice/create', [App\Classes\Invoice::class, 'create'])
-    ->post('/invoice/create', [App\Classes\Invoice::class, 'store']);
+    $router
+        ->get('/', [App\Controller\HomeController::class, 'index'])
+        ->get('/download', [App\Controller\HomeController::class, 'download'])
+        ->post('/upload', [App\Controller\HomeController::class, 'upload'])
+        ->get('/invoice', [App\Controller\InvoiceController::class, 'index'])
+        ->get('/invoice/create', [App\Controller\InvoiceController::class, 'create'])
+        ->post('/invoice/create', [App\Controller\InvoiceController::class, 'store']);
 
 
-echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
+    echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
 
+}catch (\App\Exceptions\RouteNotFoundException $e){
+//    header('HTTP/1.1 404 Not Found');
+    http_response_code(404);
+    echo $e->getMessage();
+}
 
