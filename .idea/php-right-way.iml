@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/oop/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/project_2/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/project_2/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/oop/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/oop/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/oop/vendor/ramsey/collection" />
@@ -16,6 +18,13 @@
       <excludeFolder url="file://$MODULE_DIR$/oop/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/oop/vendor/symfony/polyfill-php80" />
       <excludeFolder url="file://$MODULE_DIR$/oop/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/graham-campbell/result-type" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/project_2/vendor/vlucas/phpdotenv" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

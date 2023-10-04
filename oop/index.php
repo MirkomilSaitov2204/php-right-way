@@ -187,6 +187,7 @@ define('VIEW_PATH', __DIR__ . './views');
 //echo "<pre>";
 //print_r($_SERVER);
 //echo "<pre>";
+
 try {
 
     $router = new \App\Router();

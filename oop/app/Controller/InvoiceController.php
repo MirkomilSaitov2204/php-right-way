@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\View;
+use project_2\app\View;
 
 class InvoiceController
 {
