@@ -32,9 +32,14 @@
 //file("file.pph");
 //use App\PaymentGateway\Paddle\Transaction;
 //use \App\PaymentGateway\Stripe\Transaction as STransaction;
+use App\App;
 use App\MyInterface;
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 session_start();
 
 define('STORAGE_PATH', __DIR__ . './storage');
@@ -184,22 +189,32 @@ define('VIEW_PATH', __DIR__ . './views');
 //echo "<pre>";
 try {
 
-    $router = new App\Router();
+    $router = new \App\Router();
 
     $router
-        ->get('/', [App\Controller\HomeController::class, 'index'])
-        ->get('/download', [App\Controller\HomeController::class, 'download'])
-        ->post('/upload', [App\Controller\HomeController::class, 'upload'])
-        ->get('/invoice', [App\Controller\InvoiceController::class, 'index'])
-        ->get('/invoice/create', [App\Controller\InvoiceController::class, 'create'])
-        ->post('/invoice/create', [App\Controller\InvoiceController::class, 'store']);
+        ->get('/', [\App\Controller\HomeController::class, 'index'])
+        ->get('/download', [\App\Controller\HomeController::class, 'download'])
+        ->post('/upload', [\App\Controller\HomeController::class, 'upload'])
+        ->get('/invoice', [\App\Controller\InvoiceController::class, 'index'])
+        ->get('/invoice/create', [\App\Controller\InvoiceController::class, 'create'])
+        ->post('/invoice/create', [\App\Controller\InvoiceController::class, 'store']);
 
 
-    echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));
 
 }catch (\App\Exceptions\RouteNotFoundException $e){
 //    header('HTTP/1.1 404 Not Found');
     http_response_code(404);
     echo $e->getMessage();
 }
+
+
+(new App($router, ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
+    [
+        'host' => $_ENV['DB_HOST'],
+        'user' => $_ENV['DB_USER'],
+        'pass' => $_ENV['DB_PASS'],
+        'database' => $_ENV['DB_DATABASE'],
+        'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+    ]
+))->run();
 

@@ -2,19 +2,39 @@
 
 namespace App;
 
+/**
+ * @mixin \PDO
+ */
 class DB
 {
-    private static ?DB $instance = null;
+//    private static ?DB $instance = null;
+//
+//    private function __construct(public array $config)
+//    {
+//        echo "Instance created";
+//    }
+//
+//    public static function getInstance(array $config): DB
+//    {
+//        if (self::$instance == null)
+//            self::$instance = new DB($config);
+//        return  self::$instance;
+//    }
 
-    private function __construct(public array $config)
+
+    private \PDO $pdo;
+
+    public function __construct(protected array $config)
     {
-        echo "Instance created";
+        try {
+            $this->pdo = new \PDO('mysql:host=' . $config['host'] .';dbname='. $config['database'] , $config['user'], $config['pass']);
+        } catch (\PDOException $exception) {
+            echo $exception->getMessage();
+        }
     }
 
-    public static function getInstance(array $config): DB
+    public function __call(string $name, array $arguments)
     {
-        if (self::$instance == null)
-            self::$instance = new DB($config);
-        return  self::$instance;
+        return call_user_func_array([$this->pdo, $name], $arguments);
     }
 }
