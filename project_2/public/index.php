@@ -17,8 +17,8 @@ define('STORAGE_PATH', __DIR__ . '/../storage');
 define('VIEW_PATH', __DIR__ . '/../views');
 define('FILE_PATH', __DIR__ . '/../storage/');
 
-
-$router = new Router();
+$container = new \Domain\Container();
+$router = new Router($container);
 
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/transactions', [TransactionController::class, 'index']);
