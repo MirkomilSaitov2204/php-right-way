@@ -6,8 +6,10 @@ namespace Domain;
 
 use Domain\Exceptions\FileNotFoundException;
 use Domain\Exceptions\RouteNotFoundException;
+use Domain\Interfaces\PaymentGatewayInterface;
 use Domain\Services\EmailService;
 use Domain\Services\InvoiceService;
+use Domain\Services\PaddlePayment;
 use Domain\Services\PaymentGatewayService;
 use Domain\Services\SalesTaxService;
 
@@ -24,10 +26,15 @@ class App
      * @param array $request
      * @param Config $config
      */
-    public function __construct(protected Router $router, protected array $request, protected Config $config)
-    {
+    public function __construct(
+        protected Container $container,
+        protected Router $router,
+        protected array $request,
+        protected Config $config
+    ) {
         static::$db = new DB($config->db ?? []);
 
+        $this->container->set(PaymentGatewayInterface::class, PaddlePayment::class);
 //        static::$container = new Container();
 //        static::$container->set(InvoiceService::class, function(Container $c){
 //            return new InvoiceService(

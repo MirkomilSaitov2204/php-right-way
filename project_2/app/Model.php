@@ -11,4 +11,10 @@ class Model
     {
         $this->db = App::db();
     }
+
+    public function fetchLazy(\PDOStatement $stmt): \Generator
+    {
+        foreach ($stmt as $item)
+            yield $item;
+    }
 }

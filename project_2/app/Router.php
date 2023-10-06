@@ -9,9 +9,8 @@ class Router
     /** @var array|array[] */
     private array $routes = [];
 
-    public function __construct(private Container $container)
+    public function __construct(private readonly Container $container)
     {
-
     }
 
     /**
