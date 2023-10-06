@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Domain\Container;
+
 class App
 {
 
@@ -10,7 +12,6 @@ class App
     public function __construct(protected Router $router, protected array $request, protected array $config)
     {
             static::$db = new DB($config);
-
     }
 
     public static function db(): DB
