@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domain\Controllers;
 
 use Domain\App;
+use Domain\Attributes\Route;
 use Domain\Container;
 use Domain\Models\Ticket;
 use Domain\Services\InvoiceService;
@@ -17,6 +18,7 @@ class GeneratorExampleController
 
     }
 
+    #[Route('/examples/gerator')]
     public function index()
     {
 

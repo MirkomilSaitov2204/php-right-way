@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Domain\Controllers;
 
-use Domain\App;
-use Domain\Container;
-use Domain\Services\InvoiceService;
+use Domain\Attributes\Get;
+use Domain\Attributes\Post;
+use Domain\Attributes\Put;
 use Domain\View;
+use Domain\Services\InvoiceService;
 
 class HomeController
 {
@@ -16,6 +17,7 @@ class HomeController
 
     }
 
+    #[Get('/')]
     public function index(): View
     {
 //        App::$container->get(InvoiceService::class)->process([], 123);
@@ -23,5 +25,17 @@ class HomeController
         $this->invoiceService->process([], 123);
 
         return View::make('index');
+    }
+
+    #[Post('/', 'post')]
+    public function store()
+    {
+
+    }
+
+    #[Put('/', 'put')]
+    public function update()
+    {
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Domain;
 
+use Domain\Attributes\Route;
 use Domain\Exceptions\RouteNotFoundException;
 
 class Router
@@ -11,6 +12,25 @@ class Router
 
     public function __construct(private readonly Container $container)
     {
+    }
+
+    public function registerRoutesFromControllerAttributes(array $controllers)
+    {
+        foreach ($controllers as $controller) {
+            $reflectionController  = new \ReflectionClass($controller);
+
+            foreach ($reflectionController->getMethods() as $method){
+                $attributes = $method->getAttributes(Route::class, \ReflectionAttribute::IS_INSTANCEOF);
+
+                foreach ($attributes as $attribute){
+                    $route = $attribute->newInstance();
+
+                    $this->register($route->method, $route->routePath, [$controller, $method->getName()]);
+                }
+
+            }
+
+        }
     }
 
     /**

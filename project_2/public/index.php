@@ -21,11 +21,19 @@ define('FILE_PATH', __DIR__ . '/../storage/');
 $container = new \Domain\Container();
 $router = new Router($container);
 
-$router->get('/', [HomeController::class, 'index']);
-$router->get('/generator', [GeneratorExampleController::class, 'index']);
-$router->get('/transactions', [TransactionController::class, 'index']);
-$router->get('/transactions/create', [TransactionController::class, 'create']);
-$router->post('/transactions/store', [TransactionController::class, 'store']);
+$router->registerRoutesFromControllerAttributes([
+    HomeController::class,
+    GeneratorExampleController::class
+]);
+
+echo "<pre>";
+print_r($router->routes());
+echo "</pre>";
+//$router->get('/', [HomeController::class, 'index']);
+//$router->get('/generator', [GeneratorExampleController::class, 'index']);
+//$router->get('/transactions', [TransactionController::class, 'index']);
+//$router->get('/transactions/create', [TransactionController::class, 'create']);
+//$router->post('/transactions/store', [TransactionController::class, 'store']);
 
 (new App(
     $container,
