@@ -7,6 +7,11 @@ namespace App;
 
 class Invoice
 {
+    public function __invoke()
+    {
+        var_dump(123);
+    }
+
 //    protected array $data = [];
 
 //    protected function process(float $amount, $description){
@@ -62,10 +67,18 @@ class Invoice
 //        $this->id = uniqid('_invoce_');
 //    }
 //
+//public function (): array
+//{
+//    return  [
+//        'id' => 1, 'name' => 1
+//    ];
+//}
+
+
 //    public function __serialize(): array
 //    {
 //        return  [
-//            'id' => $this->id
+//            'id' => 1, 'name' => 1
 //        ];
 //    }
 //
@@ -74,23 +87,23 @@ class Invoice
 //        $this->id = '123';
 //    }
 
-    public function __construct(public Customer $customer)
-    {
+//    public function __construct(public Customer $customer)
+//    {
+//
+//    }
 
-    }
-
-    public function process(float $amount): void
-    {
-        if ($amount <= 0 )
-            throw new \InvalidArgumentException('Invalid invoice amount');
-        if (empty($this->customer->getBillingInfo()))
-            throw new  MissingBillingException();
-
-        echo "Processing $" . $amount . "invoice - ";
-
-        sleep(1);
-
-        echo "OK" . PHP_EOL;
-
-    }
+//    public function process(float $amount): void
+//    {
+//        if ($amount <= 0 )
+//            throw new \InvalidArgumentException('Invalid invoice amount');
+//        if (empty($this->customer->getBillingInfo()))
+//            throw new  MissingBillingException();
+//
+//        echo "Processing $" . $amount . "invoice - ";
+//
+//        sleep(1);
+//
+//        echo "OK" . PHP_EOL;
+//
+//    }
 }

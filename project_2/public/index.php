@@ -11,9 +11,6 @@ use Domain\Controllers\GeneratorExampleController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-$dotenv->load();
-
 define('STORAGE_PATH', __DIR__ . '/../storage');
 define('VIEW_PATH', __DIR__ . '/../views');
 define('FILE_PATH', __DIR__ . '/../storage/');
@@ -26,9 +23,7 @@ $router->registerRoutesFromControllerAttributes([
     GeneratorExampleController::class
 ]);
 
-echo "<pre>";
-print_r($router->routes());
-echo "</pre>";
+
 //$router->get('/', [HomeController::class, 'index']);
 //$router->get('/generator', [GeneratorExampleController::class, 'index']);
 //$router->get('/transactions', [TransactionController::class, 'index']);
@@ -43,4 +38,12 @@ echo "</pre>";
         'method' => $_SERVER['REQUEST_METHOD']
     ],
     new Config($_ENV))
-)->run();
+)->boot()->run();
+
+
+//(new Domain\Models\Invoice())->create([
+//    ['description' => 'Item 1', 'quantity' => 1, 'unitPrice' => 15.25],
+//    ['description' => 'Item 2', 'quantity' => 2, 'unitPrice' => 2],
+//    ['description' => 'Item 3', 'quantity' => 3, 'unitPrice' => 0.25],
+//]);
+

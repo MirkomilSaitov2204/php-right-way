@@ -12,29 +12,33 @@ use Domain\Services\InvoiceService;
 use Domain\Services\PaddlePayment;
 use Domain\Services\PaymentGatewayService;
 use Domain\Services\SalesTaxService;
+use Dotenv\Dotenv;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\MailerInterface;
 
 class App
 {
     /** @var DB  */
     private static DB $db;
 
+    private Config $config;
+
     /** @var Container  */
 //    public static Container $container;
 
     /**
-     * @param Router $router
+     * @param Container $container
+     * @param Router|null $router
      * @param array $request
      * @param Config $config
      */
     public function __construct(
         protected Container $container,
-        protected Router $router,
-        protected array $request,
-        protected Config $config
+        protected ?Router $router = null,
+        protected array $request = [],
     ) {
-        static::$db = new DB($config->db ?? []);
 
-        $this->container->set(PaymentGatewayInterface::class, PaddlePayment::class);
+
 //        static::$container = new Container();
 //        static::$container->set(InvoiceService::class, function(Container $c){
 //            return new InvoiceService(
@@ -47,6 +51,22 @@ class App
 //        static::$container->set(PaymentGatewayService::class, fn() => new PaymentGatewayService());
 //        static::$container->set(EmailService::class, fn() => new EmailService());
 
+    }
+
+    public function boot(): static
+    {
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv->load();
+
+        $this->config = new Config($_ENV);
+
+        static::$db = new DB($this->config->db ?? []);
+
+
+        $this->container->set(PaymentGatewayInterface::class, PaddlePayment::class);
+        $this->container->set(MailerInterface::class, fn() => new CustomMailer($this->config->mailer['dsn']));
+
+        return $this;
     }
 
     /**

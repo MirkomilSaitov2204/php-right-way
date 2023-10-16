@@ -55,6 +55,7 @@ define('VIEW_PATH', __DIR__ . './views');
 //echo $id->uuid4();
 
 
+
 //$transaction = new Transaction();
 //$transaction = $transaction->setStatus(\App\Enums\Status::STATUS_PAID);
 //
@@ -143,16 +144,19 @@ define('VIEW_PATH', __DIR__ . './views');
  *
  */
 
-//$invoice = new \App\Invoice();
 
+$obj = new \App\Invoice();
+
+var_dump($obj());
 //echo serialize(true) . PHP_EOL;
 //echo serialize(1) . PHP_EOL;
 //echo serialize(2.3) . PHP_EOL;
 //echo serialize('hello world') . PHP_EOL;
 //echo serialize([1,2,3]) . PHP_EOL;
 //echo serialize(['a' => 1, 'n' => 2]) . PHP_EOL;
-//
+
 //$str = serialize($invoice);
+//var_dump($str);
 //
 //var_dump(unserialize(serialize($invoice)));
 //
@@ -188,34 +192,34 @@ define('VIEW_PATH', __DIR__ . './views');
 //print_r($_SERVER);
 //echo "<pre>";
 
-try {
-
-    $router = new \App\Router();
-
-    $router
-        ->get('/', [\App\Controller\HomeController::class, 'index'])
-        ->get('/download', [\App\Controller\HomeController::class, 'download'])
-        ->post('/upload', [\App\Controller\HomeController::class, 'upload'])
-        ->get('/invoice', [\App\Controller\InvoiceController::class, 'index'])
-        ->get('/invoice/create', [\App\Controller\InvoiceController::class, 'create'])
-        ->post('/invoice/create', [\App\Controller\InvoiceController::class, 'store']);
-
-
-
-}catch (\App\Exceptions\RouteNotFoundException $e){
-//    header('HTTP/1.1 404 Not Found');
-    http_response_code(404);
-    echo $e->getMessage();
-}
-
-
-(new App($router, ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
-    [
-        'host' => $_ENV['DB_HOST'],
-        'user' => $_ENV['DB_USER'],
-        'pass' => $_ENV['DB_PASS'],
-        'database' => $_ENV['DB_DATABASE'],
-        'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
-    ]
-))->run();
-
+//try {
+//
+//    $router = new \App\Router();
+//
+//    $router
+//        ->get('/', [\App\Controller\HomeController::class, 'index'])
+//        ->get('/download', [\App\Controller\HomeController::class, 'download'])
+//        ->post('/upload', [\App\Controller\HomeController::class, 'upload'])
+//        ->get('/invoice', [\App\Controller\InvoiceController::class, 'index'])
+//        ->get('/invoice/create', [\App\Controller\InvoiceController::class, 'create'])
+//        ->post('/invoice/create', [\App\Controller\InvoiceController::class, 'store']);
+//
+//
+//
+//}catch (\App\Exceptions\RouteNotFoundException $e){
+////    header('HTTP/1.1 404 Not Found');
+//    http_response_code(404);
+//    echo $e->getMessage();
+//}
+//
+//
+//(new App($router, ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
+//    [
+//        'host' => $_ENV['DB_HOST'],
+//        'user' => $_ENV['DB_USER'],
+//        'pass' => $_ENV['DB_PASS'],
+//        'database' => $_ENV['DB_DATABASE'],
+//        'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+//    ]
+//))->run();
+//
