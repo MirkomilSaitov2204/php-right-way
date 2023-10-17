@@ -2,7 +2,8 @@
 
 namespace Domain\Status;
 
-class InvoiceStatus
+enum InvoiceStatus: int
 {
-
+    case  PENDING = 1;
+    case  DONE = 2;
 }

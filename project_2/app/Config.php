@@ -21,7 +21,7 @@ class Config
                 'user'     => $env['DB_USER'],
                 'pass'     => $env['DB_PASS'],
                 'database' => $env['DB_DATABASE'],
-                'driver'   => $env['DB_DRIVER'] ?? 'mysql',
+                'driver'   => $env['DB_DRIVER'] ?? 'pdo_mysql',
             ],
             'mailer' => [
                 'dsn'     => $env['MAILER_DSN'] ?? 'smtp',

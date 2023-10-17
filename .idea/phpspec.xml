@@ -20,6 +20,9 @@
       <PhpSpecSuiteConfiguration>
         <option name="myPath" value="$PROJECT_DIR$/project_2" />
       </PhpSpecSuiteConfiguration>
+      <PhpSpecSuiteConfiguration>
+        <option name="myPath" value="$PROJECT_DIR$/project_2" />
+      </PhpSpecSuiteConfiguration>
     </suites>
   </component>
 </project>
